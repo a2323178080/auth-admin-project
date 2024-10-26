@@ -1,115 +1,81 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+import { Button, Form, Input, message } from 'antd'
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+} from '@ant-design/icons'
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import {useRouter} from "next/router";
+import axios from "axios";
 
-export default function Home() {
+const initialUsername = process.env.NEXT_PUBLIC_USERNAME || ""
+const initialPassword = process.env.NEXT_PUBLIC_PASSWORD || ""
+
+interface LoginFormValues {
+    username: string
+    password: string
+}
+
+// 首頁
+export default function Login() {
+    const router= useRouter()
+  const onFinish = async (value: LoginFormValues) => {
+       try {
+           const res = await axios.post(
+                  // 登入
+                  "/api/login"
+                  , value);
+              const { token, expired } = res?.data?.data;
+              document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
+              if (res?.data?.status === true) {
+                  message.success(res.data.message)
+                  router.push('/agents')
+              }
+          } catch (error: any) {
+              message.error("登入失敗");
+          }
+      };
+
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <>
+        <div className="text-lg font-bold mb-4 text-center">Shoperlink授權管理</div>
+        <Form name={'login-form'} onFinish={onFinish}>
+          <Form.Item
+              name="username"
+              initialValue={initialUsername}
+              rules={[{ required: true,message: '請輸入使用者帳號',}]}
+              validateTrigger={['onChange', 'onBlur']}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <Input placeholder="使用者帳號" />
+          </Form.Item>
+          <Form.Item
+              name="password"
+              initialValue={initialPassword}
+              rules={[{ required: true,message: '請輸入使用者密碼' }]}
+              validateTrigger={['onChange', 'onBlur']}
+          >
+            <Input.Password
+                iconRender={visible =>
+                    visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                placeholder="使用者密碼"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          </Form.Item>
+            <div className="text-center">
+                <Button type="primary" htmlType="submit">
+                    登入系統
+                </Button>
+            </div>
+        </Form>
+      </>
+  )
+}
+
+Login.getLayout = function (page) {
+    return (
+        <>
+            <div className="bg-gray-200 min-w-max min-h-screen flex items-center justify-center">
+                <div className="p-6 bg-white shadow-md rounded">{page}</div>
+            </div>
+        </>
+    )
 }
