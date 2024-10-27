@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { message } from 'antd'
-import { AddAgent } from '@/components/agents/add-agent'
-import { AgentsTable } from '@/components/agents/agents-table'
+import { AddAgent } from '@/components/agent/add-agent'
+import { AgentTable } from '@/components/agent/agent-table'
 import {Toolbar} from '@/components/toolbar'
 import {LinkBreadcrumb} from '@/components/link-breadcrumb'
 import axios from "axios";
@@ -45,7 +45,7 @@ export default function Agents() {
                 onCancel={() => setOpen(false)}
                 callBack={onGetAgentsData}
             />
-            <AgentsTable agents={agents} onGetAgentsData={onGetAgentsData} />
+            <AgentTable agents={agents} onGetAgentsData={onGetAgentsData} />
         </div>
     )
 }

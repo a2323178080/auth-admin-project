@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
-import "@/components/agents/delete-agent.scss"
+import "@/components/agent/delete-agent.scss"
+import "@/components/license/delete-license.scss"
+import "@/components/license/license-table.scss"
 import Head from "next/head";
 import {Header} from "@/components/layout/header";
 import {SideMenu} from "@/components/layout/side-menu"

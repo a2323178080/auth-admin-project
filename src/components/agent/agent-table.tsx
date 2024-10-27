@@ -18,7 +18,7 @@ interface AgentsTableProps {
 }
 
 
-export const AgentsTable = ({ agents, onGetAgentsData }: AgentsTableProps) => {
+export const AgentTable = ({ agents, onGetAgentsData }: AgentsTableProps) => {
 
 	const { Column } = Table
 
@@ -51,7 +51,7 @@ export const AgentsTable = ({ agents, onGetAgentsData }: AgentsTableProps) => {
 				return (
 					<Space size="middle">
 						<Link
-							href={`/authroizationList/${record.id}`}
+							href={`/licenses/${record.id}`}
 							className="text-blue-400"
 						>
 							機房授權列表
