@@ -209,7 +209,7 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 
 						<Divider className="my-1" />
 
-						<Link href={`/quantityInformation/${record.id}`}>
+						<Link href={`/quantity/${record.id}`}>
 							<Button type="link">
 								數量詳情
 							</Button>

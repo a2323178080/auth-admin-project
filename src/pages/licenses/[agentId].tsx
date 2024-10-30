@@ -62,14 +62,14 @@ export default ({ agentId }: Props) => {
 
     const authroizationListPage = [
         {
-            path: '/license',
+            path: `/license/${agentId}`,
             title: <span className="text-sm">機房授權列表</span>
         },
     ]
 
     return (
         <div>
-            <LinkBreadcrumb items={authroizationListPage} />
+            <LinkBreadcrumb  items={authroizationListPage} />
             <Toolbar addButton returnButton title="新增授權" onClick={showAddModal} />
             <LicenseTable auths={auths} getAllAuths={getAllAuths} />
             <AddLicense

@@ -50,7 +50,7 @@ export const LinkBreadcrumb = ({ items = [], home }: LinkBreadcrumbProps) => {
 					<span>{item.title}</span>
 				</span>
 			)
-		} else if (item.path === '/license') {
+		} else if (item.path === '/licenses') {
 			return (
 				<span onClick={goback} className="cursor-pointer">
 					{item.title}
