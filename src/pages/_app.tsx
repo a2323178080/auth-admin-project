@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import "@/components/agent/delete-agent.scss"
 import "@/components/license/delete-license.scss"
 import "@/components/license/license-table.scss"
+import "@/components/quantity/quantity-table.scss"
 import Head from "next/head";
 import {Header} from "@/components/layout/header";
 import {SideMenu} from "@/components/layout/side-menu"
@@ -22,6 +23,15 @@ export default function App({ Component, pageProps }: any) {
             axios.defaults.headers.common['Authorization'] = token;
         }
     }, []);
+
+    useEffect(()=>{
+        const token: string = document.cookie
+            .split('; ')
+            .find((row) => row.startsWith('hexToken='))
+            ?.split('=')[1];
+        if(!token){
+            router.push('/')}
+    },[router])
 
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />)
