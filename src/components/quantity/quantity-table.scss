@@ -1,0 +1,10 @@
+.quantity-table {
+  .gray-header .ant-table-thead > tr > th {
+    background-color: rgb(220, 220, 220);
+    color: black;
+  }
+    .ant-table-wrapper .ant-table-tbody >tr.text-white >td.ant-table-cell-row-hover {
+      color: white;
+      background: rgb(60, 84, 110) !important;
+    }
+}
