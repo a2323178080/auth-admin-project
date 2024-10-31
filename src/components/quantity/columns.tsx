@@ -1,9 +1,30 @@
+interface CellData {
+	rowSpan?: number;
+	brandRowSpan?: number;
+	companySum?: string;
+	companyName?: string;
+	brandSum?: string;
+	brandName?: string;
+	shopSum?: string;
+	shopName?: string;
+	posTotalSum?: string;
+	posActiveSum?: string;
+	posReadySum?: string;
+	posExpiredSum?: string;
+	byodActiveSum?: string;
+	byodReadySum?: string;
+	byodExpiredSum?: string;
+	byodTogoSum?: string;
+	reserveByodTogoSum?: string;
+	[key: string]: any; // 允许有其他属性
+}
+
 export const columns: any = [
 	{
 		title: '#',
 		dataIndex: 'keyValue',
-		onCell: (_, index) => {
-			return { rowSpan: _.rowSpan ? _.rowSpan : 0 }
+		onCell: (record: CellData, index: number) => {
+			return { rowSpan: record.rowSpan ? record.rowSpan : 0 };
 		},
 		align:'center',
 		width:70,
@@ -11,11 +32,11 @@ export const columns: any = [
 	{
 		title: '集團名稱',
 		dataIndex: 'companyName',
-		onCell: (_, index) => {
-			return { rowSpan: _.rowSpan ? _.rowSpan : 0 }
+		onCell: (record: CellData, index: number) => {
+			return { rowSpan: record.rowSpan ? record.rowSpan : 0 };
 		},
 		//
-		render: (text, record) => {
+		render: (text: string, record: CellData) => {
 			return <div>{record.companySum || record.companyName}</div>
 		},
 		//
@@ -23,19 +44,19 @@ export const columns: any = [
 	{
 		title: '品牌名稱',
 		dataIndex: 'brandName',
-		onCell: (_, index) => {
-			return { rowSpan: _.brandRowSpan ? _.brandRowSpan : 0 }
+		onCell: (record: CellData, index: number) => {
+			return { rowSpan: record.brandRowSpan ? record.brandRowSpan : 0 };
 		},
 		//
-		render: (text, record) => {
-			return <div>{record.brandSum || record.brandName || 0}</div>
+		render: (text: string, record: CellData) => {
+			return <div>{record.brandSum || record.brandName || 0}</div>;
 		},
 		//
 	},
 	{
 		title: '分店名稱',
 		dataIndex: 'shopName',
-		render: (text, record) => {
+		render: (text: string, record: CellData) => {
 			return (
 				<div>
 					{record.keyValue === '小計' || record.keyValue === '合計' ? (
@@ -56,7 +77,7 @@ export const columns: any = [
 				title: '已啟用',
 				dataIndex: 'posActive',
 				key: 'posActive',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return (
 						<div>
 							{record.posTotalSum
@@ -71,7 +92,7 @@ export const columns: any = [
 				title: '未啟用',
 				dataIndex: 'posReady',
 				key: 'posReady',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.posReadySum || record.posReady || 0}</div>
 				},
 				width:100
@@ -80,7 +101,7 @@ export const columns: any = [
 				title: '已過期',
 				dataIndex: 'posExpired',
 				key: 'posExpired',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.posexpiredSum || record.posExpired || 0}</div>
 				},
 				width:100
@@ -95,7 +116,7 @@ export const columns: any = [
 				title: '已啟用',
 				dataIndex: 'byodActive',
 				key: 'byodActive',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.byodActiveSum || record.byodActive || 0}</div>
 				},
 				width:100
@@ -104,7 +125,7 @@ export const columns: any = [
 				title: '未啟用',
 				dataIndex: 'byodReady',
 				key: 'byodReady',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.byodReadySum || record.byodReady || 0}</div>
 				},
 				width:100
@@ -113,7 +134,7 @@ export const columns: any = [
 				title: '已過期',
 				dataIndex: 'byodExpired',
 				key: 'byodExpired',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.byodExpiredSum || record.byodExpired || 0}</div>
 				},
 				width:100
@@ -128,7 +149,7 @@ export const columns: any = [
 				title: '外帶',
 				dataIndex: 'byodTogo',
 				key: 'byodTogo',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.byodTogoSum || record.byodTogo || 0}</div>
 				},
 				width:100
@@ -137,7 +158,7 @@ export const columns: any = [
 				title: '預約外帶',
 				dataIndex: 'reserveByodTogo',
 				key: 'reserveByodTogo',
-				render: (text, record) => {
+				render: (text: string, record: CellData) => {
 					return <div>{record.reserveByodTogoSum || record.reserveByodTogo || 0}</div>
 				},
 				width:100

@@ -38,7 +38,7 @@ export const LinkBreadcrumb = ({ items = [], home }: LinkBreadcrumbProps) => {
 		...items,
 	]
 
-	function itemRender(item: BreadcrumbItem, params: any, items: BreadcrumbItem[],) {
+	function itemRender(item: any, params: any, items: any) {
 		const last = items.indexOf(item) === items.length - 1
 
 		if (last) {

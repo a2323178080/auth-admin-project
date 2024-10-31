@@ -39,13 +39,13 @@ interface LicenseTableProps {
 }
 
 export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
-	const generateExpandedRowRender = expandedData => {
+	const generateExpandedRowRender = (expandedData: Authorization) => {
 		const columns = [
 			{
 				title: '#',
 				dataIndex: 'index',
 				key: 'index',
-				render: (text, record, index) => index + 1,
+				render: (text: number, record: IP, index: number) => index + 1,
 			},
 			{
 				title: 'IP',
@@ -61,11 +61,11 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 				title: '操作',
 				dataIndex: 'id',
 				key: 'action',
-				render: (text, record, index) => {
+				render: (text: string, record: IP, index: number) => {
 					return (
 						<Space size="small" direction="vertical">
 							<DeleteIp
-								ipId={record?.id}
+								ipId={record.id}
 								bindIp={record.ip}
 								getAllAuths={getAllAuths}
 							/>
@@ -87,7 +87,7 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 			/>
 		)
 	}
-	const licenseEnableSwitch = async value => {
+	const licenseEnableSwitch = async (value: { licenseId: string; isEnable: boolean }) => {
 		try {
 			const res = await axios.put('/api/license/enableSwitch',value )
 			if (res.data.status === true) {
@@ -162,7 +162,7 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 			dataIndex: 'isEnable',
 			key: 'status',
 			align: 'center',
-			render: (text, record, index) => {
+			render: (text: boolean, record: Authorization, index: number) => {
 				return record.isEnable ? (
 					<Switch
 						defaultChecked
@@ -190,12 +190,12 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 			dataIndex: 'id',
 			key: 'action',
 			align: 'center',
-			render: (text, record) => {
+			render: (text: string, record: Authorization) => {
 				return (
 					<Space size={0} direction="vertical" className="py-0">
 						<BindIp
 							getAllAuths={getAllAuths}
-							licenseId={record?.id}
+							licenseId={record.id}
 						/>
 						<Divider className="my-1" />
 
@@ -217,7 +217,7 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 						<Divider className="my-1" />
 
 						<DeleteLicense
-							licenseId={record?.id}
+							licenseId={record.id}
 							startDate={record.startDate}
 							expiredDate={record.expiredDate}
 							getAllAuths={getAllAuths}
@@ -228,7 +228,7 @@ export const LicenseTable = ({ auths, getAllAuths }: LicenseTableProps) => {
 		},
 	]
 	const columnWidth = `${100 / columns.length}%`
-	columns.forEach(column => {
+	columns.forEach((column: any) => {
 		column.width = columnWidth
 	})
 

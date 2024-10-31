@@ -76,7 +76,7 @@ export default ({ agentId }: Props) => {
                 AddModalOpen={AddModalOpen}
                 cancelAddModal={cancelAddModal}
                 getAllAuths={getAllAuths}
-                id={router.query.agentId}
+                id={Array.isArray(router.query.agentId) ? router.query.agentId[0] : router.query.agentId}
             />
         </div>
     )

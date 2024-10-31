@@ -20,7 +20,7 @@ export const DeleteAgent = ({ agentId, agentName, onGetAgentsData }: DeleteAgent
 				message.error(res?.data.message)
 			}
 		} catch (error) {
-			message.error(error)
+			message.error("失敗")
 		}
 	}
 

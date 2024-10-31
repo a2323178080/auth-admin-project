@@ -1,3 +1,12 @@
+interface Agent {
+    id: string
+    key?: string
+    name: string
+    licenseCount: number
+    licenseIpCount: number
+    createTime: string
+}
+
 const agents = [
     {
         id: "3bdc9da1-c2c0-4a86-a1d0-b86e7e675813",
@@ -24,6 +33,6 @@ const agents = [
 
 export default agents;
 
-export function addAgent(newAgent) {
+export function addAgent(newAgent: Agent) {
     agents.push(newAgent);
 }

@@ -56,9 +56,9 @@ export default function QuantityTable({ licenseId }:{licenseId: string}) {
 		}
 	}
 
-	const getNewArray = array => {
+	const getNewArray = (array: any): any => {
 		const newArray: any = []
-		array.forEach((item, index0) => {
+		array.forEach((item: any, index0: number) => {
 			if (item.brandList.length === 0) {
 				item.brandList.push({
 					key: 'test',
@@ -66,7 +66,7 @@ export default function QuantityTable({ licenseId }:{licenseId: string}) {
 					shopList: [],
 				})
 			}
-			item.brandList.forEach((brandObject, index) => {
+			item.brandList.forEach((brandObject: any, index: number) => {
 				if (brandObject.shopList.length === 0) {
 					brandObject.shopList.push({
 						key: 'withoutShop',
@@ -84,7 +84,7 @@ export default function QuantityTable({ licenseId }:{licenseId: string}) {
 					})
 				}
 
-				brandObject.shopList.forEach((shopObject, shopObjectIndex) => {
+				brandObject.shopList.forEach((shopObject: any, shopObjectIndex: number) => {
 					if (shopObjectIndex === 0) {
 						shopObject = {
 							...shopObject,
@@ -133,7 +133,7 @@ export default function QuantityTable({ licenseId }:{licenseId: string}) {
 		return newArray
 	}
 
-	const getRowClassName = record => {
+	const getRowClassName = (record: any): string => {
 		if (record.keyValue === '小計') {
 			return 'bg-custom-light-gray'
 		} else if (record.keyValue === "合計") {

@@ -47,7 +47,7 @@ export const AgentTable = ({ agents, onGetAgentsData }: AgentsTableProps) => {
 			key: 'id',
 			width: 200,
 			align: 'left',
-			render: (text, record) => {
+			render: (text: string, record: Agent) => {
 				return (
 					<Space size="middle">
 						<Link

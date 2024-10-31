@@ -5,7 +5,7 @@ import axios from "axios";
 interface BindIpProps {
 	getAllAuths: () => void;
 	licenseId: string;
-	disabled: boolean;
+	disabled?: boolean;
 }
 
 export const BindIp = ({ getAllAuths, licenseId, disabled }: BindIpProps) => {

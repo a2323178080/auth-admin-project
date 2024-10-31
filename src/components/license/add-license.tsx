@@ -13,8 +13,8 @@ interface AddLicenseProps {
 }
 
 export const AddLicense = ({ AddModalOpen, cancelAddModal, getAllAuths, id }: AddLicenseProps) => {
-	const disabledDate = current => {
-		return current && current < dayjs().startOf('day')
+	const disabledDate = (current: dayjs.Dayjs | null): boolean => {
+		return !!current && current < dayjs().startOf('day')
 	}
 	const validateEndDate = (rule: any, endDate: dayjs.Dayjs) => {
 		const startDate = form.getFieldValue('startDate' as any)

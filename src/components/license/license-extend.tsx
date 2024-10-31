@@ -8,7 +8,7 @@ interface LicenseExtendProps {
 	authExtendStartDate: string; // 授權起始日
 	authName: string; // 機房名稱
 	licenseId: string; // 授權 ID
-	disabled: boolean; // 按鈕禁用狀態
+	disabled?: boolean; // 按鈕禁用狀態
 }
 
 export const LicenseExtend = ({
@@ -18,9 +18,10 @@ export const LicenseExtend = ({
 	licenseId,
 	disabled,
 }: LicenseExtendProps) => {
-	const disabledDate = current => {
-		const authStartDate = dayjs(authExtendStartDate)
-		return current && current.isBefore(authStartDate.add(1, 'day'), 'day')
+
+	const disabledDate = (current: dayjs.Dayjs | null): boolean => {
+		const authStartDate = dayjs(authExtendStartDate);
+		return !!current && current.isBefore(authStartDate.add(1, 'day'), 'day');
 	}
 
 	const [form] = Form.useForm()
