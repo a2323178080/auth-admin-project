@@ -13,9 +13,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         return res.status(401).json({ success: false, message: ["未授權"] });
     }
     // 判斷token是否正確
+    // 使用正則表達式提取 hexToken
+    const hexTokenMatch = authHeader.match(/hexToken=([^;]+)/);
+    const hexToken = hexTokenMatch ? hexTokenMatch[1] : null;
+    console.log("hexToken@@",hexToken)
+    if (!hexToken) {
+        return res.status(401).json({ success: false, message: ["無效的Token"] });
+    }
+
     try {
-        const jwtToken = authHeader.split('=')[1];
-        jwt.verify(jwtToken, SECRET_KEY);
+        jwt.verify(hexToken, SECRET_KEY);
     } catch (error) {
         console.error("JWT verification error:", error);
         return res.status(401).json({ success: false, message: ["無效的Token"] });
